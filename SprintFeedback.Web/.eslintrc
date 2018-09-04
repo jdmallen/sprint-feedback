@@ -1,0 +1,62 @@
+{
+	"parser": "babel-eslint",
+	"plugins": [
+		"react"
+	],
+	"env":
+	{
+		"browser": true
+	},
+	"rules":
+	{
+		"brace-style": ["warn", "allman", {"allowSingleLine": true}],
+		"max-len": [1, 80, 2, {"ignoreComments": true}],
+		"react/prop-types": [0],
+		"no-tabs": "off",
+		"no-mixed-spaces-and-tabs": "warn",
+		"jsx-a11y/label-has-for": ["warn",
+		{
+			"components": ["Label"],
+			"required": 
+			{
+				"some": ["nesting", "id"]
+			},
+			"allowChildren": false
+		}],
+		"jsx-a11y/anchor-is-valid": [ "error",
+		{
+			"components": ["Link"],
+			"specialLink": ["to", "hrefLeft", "hrefRight"],
+			"aspects": ["noHref", "invalidHref", "preferButton"]
+		}],
+		"implicit-arrow-linebreak": ["warn", "below"],
+		"indent": ["warn","tab"],
+		"linebreak-style": "off",
+		"comma-dangle": ["warn", "always-multiline"],
+		"no-unused-vars": "warn",
+		"class-methods-use-this": "warn",
+		"operator-linebreak": ["warn", "before", {"overrides": {"=": "after"}}],
+		"react/jsx-indent": [1, "tab"],
+		"react/jsx-indent-props": ["warn", "tab"],
+		"quotes": ["error", "double"],
+		"space-before-function-paren": ["error",
+		{
+			"anonymous": "never",
+			"named": "never",
+			"asyncArrow": "ignore"
+		}],
+		"react/forbid-prop-types": "off",
+		"react/jsx-one-expression-per-line": ["off"],
+		"react/no-unused-prop-types":  "warn"
+	},
+	"extends": ["airbnb"],
+	"overrides": [
+	{
+		"files": ["*Container.jsx"],
+		"rules": 
+		{
+			"react/prop-types": [1]
+		}
+	}]
+}
+
