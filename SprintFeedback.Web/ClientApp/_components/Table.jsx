@@ -3,13 +3,13 @@ import { Table as TableStrap } from "reactstrap";
 
 const Table = ({ data }) =>
 	(
-		<TableStrap>
+		<TableStrap size="sm" hover responsive>
 			<thead>
 				<tr>
 					{
 						data.columns && data.columns.map(col =>
 							(
-								<th>{col}</th>
+								<th key={col}>{col}</th>
 							))
 					}
 				</tr>
@@ -18,11 +18,11 @@ const Table = ({ data }) =>
 				{
 					data.rows && data.rows.map(row =>
 						(
-							<tr>
+							<tr key={row.id}>
 								{
-									data.columns.map(col =>
+									data.columns.map((col, i) =>
 										(
-											<td>{row[col]}</td>
+											<td key={`${row.id}_${i}`}>{row[col]}</td>
 										))
 								}
 							</tr>

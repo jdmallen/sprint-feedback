@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import { toggleNav as toggleNavDuck } from "../_ducks/ui";
 import { Footer } from "../_components";
+import AllFeedback from "../AllFeedback/AllFeedback";
 import MyFeedback from "../MyFeedback/MyFeedback";
 import styles from "./MainApp.scss";
 
@@ -44,7 +45,13 @@ class App extends Component
 					<Collapse isOpen={isNavbarOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink>Hello, User</NavLink>
+								<NavLink tag={Link} to="/">Mine</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink tag={Link} to="/All">All</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink className="text-secondary">Hello, User</NavLink>
 							</NavItem>
 						</Nav>
 					</Collapse>
@@ -52,6 +59,7 @@ class App extends Component
 				<Container>
 					<Switch>
 						<Route exact path="/" component={MyFeedback} />
+						<Route exact path="/All" component={AllFeedback} />
 					</Switch>
 				</Container>
 				<Footer />

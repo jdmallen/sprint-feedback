@@ -21,7 +21,7 @@ $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 
 $primary:       darken($red, 15%) !default;
-$secondary:     $gray-600 !default;
+$secondary:     lighten($orange, 15%) !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;

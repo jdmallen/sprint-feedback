@@ -47,7 +47,8 @@
 		}],
 		"react/forbid-prop-types": "off",
 		"react/jsx-one-expression-per-line": ["off"],
-		"react/no-unused-prop-types":  "warn"
+		"react/no-unused-prop-types":  "warn",
+		"react/no-array-index-key": "warn",
 	},
 	"extends": ["airbnb"],
 	"overrides": [
