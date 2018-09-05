@@ -1,13 +1,21 @@
-using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SprintFeedback.DataAccess.Config;
 
 namespace SprintFeedback.DataAccess
 {
-		public static class DataAccessServiceExtensions
+	public static class DataAccessServiceExtensions
+	{
+		public static IServiceCollection AddDataAccessServices(
+			this IServiceCollection services,
+			string connectionString)
 		{
-				public static ServiceCollection AddDataAccessServices(this ServiceCollection services)
+			services.AddDbContext<SfContext>(
+				opts =>
 				{
-					return services;
-				}
+					opts.UseSqlite(connectionString);
+				});
+			return services;
 		}
+	}
 }

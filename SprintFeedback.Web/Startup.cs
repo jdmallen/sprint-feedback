@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using JDMallen.Toolbox.Factories;
+using JDMallen.Toolbox.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using SprintFeedback.DataAccess;
+using SprintFeedback.DataAccess.Config;
 
 namespace SprintFeedback.Web
 {
@@ -27,6 +30,32 @@ namespace SprintFeedback.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var settings = Configuration.GetSection("Settings").Get<Settings>();
+			services.AddSingleton(settings);
+
+			var signingKey =
+				new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
+
+			services.Configure<JwtOptions>(
+				options =>
+				{
+					options.Audience = settings.JwtAudience;
+					options.Issuer = settings.JwtIssuer;
+					options.ValidForSpan = TimeSpan.FromMinutes(settings.JwtExpireMinutes);
+					options.SigningCredentials = new SigningCredentials(
+						signingKey,
+						SecurityAlgorithms.HmacSha256);
+				});
+
+			var connStr = new SqliteConnectionStringBuilder
+			{
+				DataSource = settings.DbFilePath
+			}.ConnectionString;
+
+			services.AddDataAccessServices(connStr);
+
+			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
+
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			
 			services.AddAntiforgery(
@@ -38,20 +67,40 @@ namespace SprintFeedback.Web
 					options.HeaderName = "X-XSRF-TOKEN";
 				}
 			);
+			services.Configure<IISOptions>(options =>
+			{
+				options.AutomaticAuthentication = true;
+			});
+
+			services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
 			services.AddAuthentication(
-						options =>
+					options =>
+					{
+						options.DefaultAuthenticateScheme =
+							JwtBearerDefaults.AuthenticationScheme;
+						options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+						options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+					})
+				.AddJwtBearer(
+					config =>
+					{
+						config.RequireHttpsMetadata = true;
+						config.SaveToken = true;
+						config.TokenValidationParameters = new TokenValidationParameters
 						{
-							options.DefaultAuthenticateScheme =
-								JwtBearerDefaults.AuthenticationScheme;
-							options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-							options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-						});
+							ValidIssuer = settings.JwtIssuer,
+							ValidAudience = settings.JwtIssuer,
+							ValidateIssuerSigningKey = true,
+							IssuerSigningKey = signingKey,
+							RequireExpirationTime = true,
+							ClockSkew = TimeSpan.Zero
+						};
+					});
 
 			services.AddMvc(
 				options =>
 				{
-					options.SslPort = 44321;
 					options.Filters.Add(new RequireHttpsAttribute());
 				});
 		}
@@ -60,7 +109,8 @@ namespace SprintFeedback.Web
 		public void Configure(
 			IApplicationBuilder app,
 			IHostingEnvironment env,
-			ILoggerFactory loggerFactory)
+			ILoggerFactory loggerFactory,
+			SfContext dbContext)
 		{
 			if (env.IsDevelopment())
 			{
