@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Table } from "../_components";
+import { Table, LoadingGif } from "../_components";
 import { listFetchData } from "../_ducks/allFeedback";
 
 class AllFeedback extends Component
@@ -14,16 +14,20 @@ class AllFeedback extends Component
 
 	render()
 	{
-		const { list } = this.props;
+		const { list, loading } = this.props;
+
 		return (
-			<Table data={list} />
+			<div>
+				{loading && <LoadingGif />}
+				{!loading && <Table data={list} />}
+			</div>
 		);
 	}
 }
 
-
 AllFeedback.propTypes = {
 	list: PropTypes.object,
+	loading: PropTypes.bool.isRequired,
 };
 
 AllFeedback.defaultProps = {
@@ -36,6 +40,7 @@ AllFeedback.defaultProps = {
 const mapStateToProps = state =>
 	({
 		list: state.allFeedback.list,
+		loading: state.allFeedback.isLoading,
 	});
 
 const mapDispatchToProps = dispatch =>

@@ -2,8 +2,8 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { Router, Route } from "react-router";
-import fontawesome from "@fortawesome/fontawesome";
-import { faUser } from "@fortawesome/fontawesome-free-solid";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faUser, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import store from "./store";
 import App from "./MainApp/MainApp";
 import { getBrowserInfo, history } from "./_helpers";
@@ -12,7 +12,7 @@ import "../Styles/customBootstrap.scss";
 
 getBrowserInfo();
 
-fontawesome.library.add(faUser);
+library.add(faUser, faSpinner);
 
 // pass initialState to store() once you have it
 const reduxStore = store();
