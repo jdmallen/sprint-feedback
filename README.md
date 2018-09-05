@@ -1,2 +1,11 @@
-# sprint-feedback
-A quick &amp; dirty CRUD React app to gather feedback from a team about a Agile Scrum sprint, then report it to the Scrum Master.
+# Sprint Feedback Utility
+A quick &amp; dirty CRUD React app that gathers feedback from an Agile team about a Scrum Sprint, then reports it to the Scrum Master. Uses Windows Authentication.
+
+### Requirements
+* .NET Core 2.1.3 (latest as of 2018-09-05)
+
+### Getting Started
+1. `git clone git@github.com:jdmallen/sprint-feedback.git`
+2. `cd sprint-feedback/SprintFeedback.Web/`
+3. `yarn && yarn build` or `npm i && npm run build`
+4. `dotnet run`
