@@ -1,0 +1,13 @@
+@import "../../Styles/customBootstrapVariables.scss";
+
+.positive {
+	background-color: lighten($teal, 5%) !important;
+}
+
+.negative {
+	background-color: lighten($blue, 15%) !important;
+}
+
+.headerButton {
+	padding: 1px 4px !important;
+}

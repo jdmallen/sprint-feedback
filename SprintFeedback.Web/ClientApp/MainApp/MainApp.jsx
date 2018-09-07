@@ -18,8 +18,7 @@ import {
 } from "reactstrap";
 import { toggleNav as toggleNavDuck } from "../_ducks/ui";
 import { Footer } from "../_components";
-import AllFeedback from "../AllFeedback/AllFeedback";
-import MyFeedback from "../MyFeedback/MyFeedback";
+import Feedback from "../Feedback/Feedback";
 import styles from "./MainApp.scss";
 
 class App extends Component
@@ -37,29 +36,31 @@ class App extends Component
 		const { isNavbarOpen } = this.props;
 		return (
 			<div className={styles.app}>
-				<Navbar color="primary" dark expand="md">
+				<Navbar className={styles.navbar} dark expand="md">
 					<NavbarBrand tag={Link} to="/">Sprint Feedback</NavbarBrand>
 					<NavbarToggler onClick={() =>
 						this.toggleNavbar()}
 					/>
 					<Collapse isOpen={isNavbarOpen} navbar>
-						<Nav className="ml-auto" navbar>
+						<Nav navbar horizontal="start" className="mr-auto">
 							<NavItem>
 								<NavLink tag={Link} to="/">Mine</NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink tag={Link} to="/All">All</NavLink>
 							</NavItem>
+						</Nav>
+						<Nav navbar horizontal="end" className="ml-auto">
 							<NavItem>
-								<NavLink className="text-secondary">Hello, User</NavLink>
+								<div className="navbar-text text-light">Hello, User</div>
 							</NavItem>
 						</Nav>
 					</Collapse>
 				</Navbar>
 				<Container>
 					<Switch>
-						<Route exact path="/" component={MyFeedback} />
-						<Route exact path="/All" component={AllFeedback} />
+						<Route exact path="/" component={Feedback} />
+						<Route exact path="/All" component={Feedback} />
 					</Switch>
 				</Container>
 				<Footer />
