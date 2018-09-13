@@ -5,16 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JDMallen.Toolbox" Version="1.0.7" />
+    <PackageReference Include="JDMallen.Toolbox.Infrastructure.EFCore" Version="1.0.7" />
+    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="1.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />
-    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
   </ItemGroup>
 
 </Project>
