@@ -110,3 +110,8 @@ typings/
 
 # Serverless directories
 .serverless
+
+## Other
+
+# Sensitive data
+*.pfx

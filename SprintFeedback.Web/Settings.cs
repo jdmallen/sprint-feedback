@@ -11,5 +11,7 @@
 		public string JwtIssuer { get; set; }
 
 		public string JwtSecretKey { get; set; }
+
+		public bool ReverseProxy { get; set; }
 	}
 }

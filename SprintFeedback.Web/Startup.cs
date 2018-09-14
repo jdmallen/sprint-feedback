@@ -101,7 +101,10 @@ namespace SprintFeedback.Web
 			services.AddMvc(
 				options =>
 				{
-					options.Filters.Add(new RequireHttpsAttribute());
+					if (!settings.ReverseProxy)
+					{
+						options.Filters.Add(new RequireHttpsAttribute());
+					}
 				});
 		}
 
@@ -110,6 +113,7 @@ namespace SprintFeedback.Web
 			IApplicationBuilder app,
 			IHostingEnvironment env,
 			ILoggerFactory loggerFactory,
+			Settings settings,
 			SfContext dbContext)
 		{
 			if (env.IsDevelopment())
@@ -121,7 +125,10 @@ namespace SprintFeedback.Web
 				app.UseHsts();
 			}
 
-			app.UseHttpsRedirection();
+			if (!settings.ReverseProxy)
+			{
+				app.UseHttpsRedirection();
+			}
 
 			app.UseAuthentication();
 
