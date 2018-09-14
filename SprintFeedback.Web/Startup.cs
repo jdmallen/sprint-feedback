@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.Data.Sqlite;
@@ -131,6 +132,16 @@ namespace SprintFeedback.Web
 			}
 
 			app.UseAuthentication();
+
+			if (settings.ReverseProxy)
+			{
+				app.UseForwardedHeaders(
+					new ForwardedHeadersOptions
+					{
+						ForwardedHeaders = ForwardedHeaders.XForwardedFor
+						                   | ForwardedHeaders.XForwardedProto
+					});
+			}
 
 			app.UseStaticFiles("");
 
