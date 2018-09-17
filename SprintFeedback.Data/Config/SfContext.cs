@@ -1,7 +1,7 @@
 ﻿using JDMallen.Toolbox.Infrastructure.EFCore.Config;
 using Microsoft.EntityFrameworkCore;
 
-namespace SprintFeedback.DataAccess.Config
+namespace SprintFeedback.Data.Config
 {
 	public class SfContext : EFContextBase
 	{

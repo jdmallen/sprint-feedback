@@ -1,9 +1,9 @@
 ﻿using System;
 using JDMallen.Toolbox.Infrastructure.EFCore.Models;
 
-namespace SprintFeedback.DataAccess.Models
+namespace SprintFeedback.Data.Models
 {
-	public class Feedback : SqliteEntityModel<Guid>
+	public class Feedback : MySqlEntityModel<Guid>
 	{
 		public Guid ObjectSid { get; set; }
 

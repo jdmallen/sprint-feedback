@@ -1,8 +1,14 @@
-﻿namespace SprintFeedback.Web
+﻿namespace SprintFeedback.Data.Config
 {
 	public class Settings
 	{
-		public string DbFilePath { get; set; }
+		public string DbConnectionLogin { get; set; }
+
+		public string DbConnectionPassword { get; set; }
+
+		public string DbConnectionServer { get; set; }
+
+		public string DbName { get; set; }
 
 		public string JwtAudience { get; set; }
 

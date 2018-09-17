@@ -9,13 +9,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SprintFeedback.DataAccess;
-using SprintFeedback.DataAccess.Config;
+using SprintFeedback.Data;
+using SprintFeedback.Data.Config;
 
 namespace SprintFeedback.Web
 {
@@ -47,13 +46,8 @@ namespace SprintFeedback.Web
 						signingKey,
 						SecurityAlgorithms.HmacSha256);
 				});
-
-			var connStr = new SqliteConnectionStringBuilder
-			{
-				DataSource = settings.DbFilePath
-			}.ConnectionString;
-
-			services.AddDataAccessServices(connStr);
+			
+			services.AddDataServices(settings);
 
 			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
 
@@ -161,6 +155,11 @@ namespace SprintFeedback.Web
 							action = "Index"
 						});
 				});
+#if DEBUG
+			dbContext.DropTablesAndEnsureCreated();
+#else
+			dbContext.DropTablesAndEnsureCreated(false);
+#endif
 		}
 	}
 }

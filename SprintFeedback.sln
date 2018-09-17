@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.Web", "SprintFeedback.Web\SprintFeedback.Web.csproj", "{E9A7F576-78AB-4FEB-86EC-1269D999E336}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.DataAccess", "SprintFeedback.DataAccess\SprintFeedback.DataAccess.csproj", "{34406906-AC99-455C-B51A-6A0AD49625EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.Data", "SprintFeedback.Data\SprintFeedback.Data.csproj", "{34406906-AC99-455C-B51A-6A0AD49625EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
