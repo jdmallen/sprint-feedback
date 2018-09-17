@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SprintFeedback.Data;
+using SprintFeedback.Data.Context.Dapper;
 using SprintFeedback.Data.Config;
 
 namespace SprintFeedback.Web
@@ -47,7 +47,7 @@ namespace SprintFeedback.Web
 						SecurityAlgorithms.HmacSha256);
 				});
 			
-			services.AddDataServices(settings);
+			services.AddDataContextDapperServices(settings);
 
 			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
 
@@ -155,11 +155,6 @@ namespace SprintFeedback.Web
 							action = "Index"
 						});
 				});
-#if DEBUG
-			dbContext.DropTablesAndEnsureCreated();
-#else
-			dbContext.DropTablesAndEnsureCreated(false);
-#endif
 		}
 	}
 }
