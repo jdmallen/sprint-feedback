@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using SprintFeedback.Data.Config;
+using SprintFeedback.Data.Context.Dapper.Config;
 
 namespace SprintFeedback.Data.Context.Dapper
 {
@@ -10,7 +11,7 @@ namespace SprintFeedback.Data.Context.Dapper
 			this IServiceCollection services,
 			Settings settings)
 		{
-			
+			services.AddTransient<SfContext>();
 			return services;
 		}
 	}
