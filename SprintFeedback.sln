@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.Web", "Sprin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.Data", "SprintFeedback.Data\SprintFeedback.Data.csproj", "{34406906-AC99-455C-B51A-6A0AD49625EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprintFeedback.Data.Context.Dapper", "SprintFeedback.Data.Context.Dapper\SprintFeedback.Data.Context.Dapper.csproj", "{51C926CF-ACDD-4749-9C49-4DA93BBAAFFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback.Data.Context.EFCore", "SprintFeedback.Data.Context.EFCore\SprintFeedback.Data.Context.EFCore.csproj", "{51C926CF-ACDD-4749-9C49-4DA93BBAAFFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprintFeedback", "SprintFeedback\SprintFeedback.csproj", "{A0393DEC-B7DD-48E2-9E71-1402CE6E408D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SprintFeedback", "SprintFeedback\SprintFeedback.csproj", "{A0393DEC-B7DD-48E2-9E71-1402CE6E408D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

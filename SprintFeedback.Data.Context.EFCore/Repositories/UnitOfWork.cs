@@ -1,11 +1,10 @@
-
+using JDMallen.Toolbox.Infrastructure.EFCore.Implementations;
 using JDMallen.Toolbox.RepositoryPattern.Implementations;
-using SprintFeedback.Data.Config;
-using SprintFeedback.Data.Context.Dapper.Config;
+using SprintFeedback.Data.Context.EFCore.Config;
 
-namespace SprintFeedback.Data.Context.Dapper.Repositories
+namespace SprintFeedback.Data.Context.EFCore.Repositories
 {
-	public class UnitOfWork : UnitOfWorkBase<SfContext>
+	public class UnitOfWork : EFUnitOfWorkBase<SfContext>
 	{
 		public UnitOfWork(SfContext connectionFactory)
 			: base(connectionFactory)

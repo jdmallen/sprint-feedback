@@ -6,15 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDMallen.Toolbox" Version="2.1.2" />
-    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.1.2" />
+    <PackageReference Include="JDMallen.Toolbox" Version="2.2.4" />
+    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SprintFeedback.Data.Context.Dapper\SprintFeedback.Data.Context.EFCore.csproj" />
     <ProjectReference Include="..\SprintFeedback\SprintFeedback.csproj" />
     <ProjectReference Include="..\SprintFeedback.Data\SprintFeedback.Data.csproj" />
-    <ProjectReference Include="..\SprintFeedback.Data.Context.Dapper\SprintFeedback.Data.Context.Dapper.csproj" />
   </ItemGroup>
 
 </Project>

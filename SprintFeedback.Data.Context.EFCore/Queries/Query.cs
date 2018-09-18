@@ -1,9 +1,8 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace SprintFeedback.Data.Context.Dapper.Queries
+namespace SprintFeedback.Data.Context.EFCore.Queries
 {
 	public static class Query
 	{

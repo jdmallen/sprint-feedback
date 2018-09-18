@@ -13,8 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SprintFeedback.Data.Context.Dapper;
 using SprintFeedback.Data.Config;
+using SprintFeedback.Data.Context.EFCore;
+using SprintFeedback.Data.Context.EFCore.Config;
 
 namespace SprintFeedback.Web
 {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MySql.Data.MySqlClient;
 using SprintFeedback.Data.Config;
-using SprintFeedback.Data.Context.Dapper.Config;
+using SprintFeedback.Data.Context.EFCore.Config;
 
-namespace SprintFeedback.Data.Context.Dapper
+namespace SprintFeedback.Data.Context.EFCore
 {
 	public static class DataContextDapperServiceExtensions
 	{
