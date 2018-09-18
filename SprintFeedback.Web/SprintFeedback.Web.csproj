@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SprintFeedback.Data.Context.Dapper\SprintFeedback.Data.Context.EFCore.csproj" />
+    <ProjectReference Include="..\SprintFeedback.Data.Context.EFCore\SprintFeedback.Data.Context.EFCore.csproj" />
     <ProjectReference Include="..\SprintFeedback\SprintFeedback.csproj" />
     <ProjectReference Include="..\SprintFeedback.Data\SprintFeedback.Data.csproj" />
   </ItemGroup>
