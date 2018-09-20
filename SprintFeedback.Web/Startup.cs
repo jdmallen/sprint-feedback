@@ -48,7 +48,7 @@ namespace SprintFeedback.Web
 						SecurityAlgorithms.HmacSha256);
 				});
 			
-			services.AddDataContextDapperServices(settings);
+			services.AddDataContextEFCoreServices(settings);
 
 			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
 
@@ -156,6 +156,9 @@ namespace SprintFeedback.Web
 							action = "Index"
 						});
 				});
+
+			// dbContext.Database.EnsureDeleted();
+			// dbContext.Database.EnsureCreated();
 		}
 	}
 }

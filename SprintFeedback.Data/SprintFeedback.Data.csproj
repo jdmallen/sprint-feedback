@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDMallen.Toolbox" Version="2.2.4" />
-    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.4" />
+    <PackageReference Include="GenFu" Version="1.4.22" />
+    <PackageReference Include="JDMallen.Toolbox" Version="2.2.7" />
+    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.7" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
   </ItemGroup>

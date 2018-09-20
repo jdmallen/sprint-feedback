@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using SprintFeedback.Data.Config;
 
 namespace SprintFeedback.Data
 {

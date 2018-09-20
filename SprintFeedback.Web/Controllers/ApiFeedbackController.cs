@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using JDMallen.Toolbox.Interfaces;
+using JDMallen.Toolbox.Models;
 using Microsoft.AspNetCore.Mvc;
+using SprintFeedback.Data.Context.EFCore.Repositories;
+using SprintFeedback.Data.Models;
+using SprintFeedback.Data.Parameters;
 
 namespace SprintFeedback.Web.Controllers
 {
@@ -10,36 +14,88 @@ namespace SprintFeedback.Web.Controllers
 	[ApiController]
 	public class ApiFeedbackController : ControllerBase
 	{
-		// GET api/values
-		[HttpGet]
-		public ActionResult<IEnumerable<string>> Get()
+		private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+
+		public ApiFeedbackController(
+			IUnitOfWorkFactory unitOfWorkFactory)
 		{
-			return new string[] { "value1", "value2" };
+			_unitOfWorkFactory = unitOfWorkFactory;
 		}
 
-		// GET api/values/5
-		[HttpGet("{id}")]
-		public ActionResult<string> Get(int id)
+		[HttpGet]
+		public async Task<ActionResult<IPagedResult<Feedback>>> Find(
+			[FromQuery] FeedbackParameters parameters)
 		{
-			return "value";
+			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
+			{
+				return Ok(await uow.FeedbackRepository.FindPaged(parameters));
+			}
+		}
+
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Feedback>> Find(Guid id)
+		{
+			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
+			{
+				return Ok(await uow.FeedbackRepository.Get(id));
+			}
 		}
 
 		// POST api/values
 		[HttpPost]
-		public void Post([FromBody] string value)
+		public async Task<ActionResult<Feedback>> Post(
+			[FromBody] Feedback feedback)
 		{
+			if (!ModelState.IsValid)
+				return BadRequest();
+
+			Feedback added;
+			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
+			{
+				uow.Begin();
+				added = await uow.FeedbackRepository.Add(feedback);
+				uow.Commit();
+			}
+
+			return CreatedAtAction(nameof(Find), new {added.Id}, added);
 		}
 
 		// PUT api/values/5
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		public async Task<ActionResult<Feedback>> Put(
+			Guid id,
+			[FromBody] Feedback feedback)
 		{
+			if (!ModelState.IsValid)
+				return BadRequest();
+
+			Feedback updated;
+			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
+			{
+				uow.Begin();
+				updated = await uow.FeedbackRepository.Update(feedback);
+				uow.Commit();
+			}
+
+			return Ok(updated);
 		}
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public async Task<ActionResult> Delete(Guid id)
 		{
+			if (!ModelState.IsValid)
+				return BadRequest();
+
+			Feedback deleted;
+			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
+			{
+				uow.Begin();
+				deleted = await uow.FeedbackRepository.Remove(id);
+				uow.Commit();
+			}
+
+			return Ok(deleted);
 		}
 	}
 }

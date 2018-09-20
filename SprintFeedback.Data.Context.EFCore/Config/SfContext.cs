@@ -1,22 +1,39 @@
 ﻿using System;
-using System.Data;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
 using JDMallen.Toolbox.Infrastructure.EFCore.Config;
-using JDMallen.Toolbox.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using SprintFeedback.Data.Config;
+using SprintFeedback.Data.Models;
+using SprintFeedback.Data.Utilities;
 
 namespace SprintFeedback.Data.Context.EFCore.Config
 {
-	public class SfContext : EFContextBase, IContext
+	public class SfContext : EFContextBase
 	{
-		private readonly Settings _settings;
-
-		public SfContext(DbContextOptions options, Settings settings)
+		public SfContext(DbContextOptions options)
 			: base(options)
 		{
-			_settings = settings;
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Model.AddEntityType(typeof(Feedback));
+			modelBuilder.Entity<Feedback>(
+				builder =>
+				{
+					builder.HasKey(f => f.Id);
+					var env =
+						Environment.GetEnvironmentVariable(
+							"ASPNETCORE_ENVIRONMENT");
+					if ("Development".Equals(
+						env,
+						StringComparison.InvariantCultureIgnoreCase))
+					{
+						builder.HasData(
+							SeedData.GenerateSampleFeedback().ToArray());
+					}
+
+					builder.Ignore(f => f.ShortId);
+				});
 		}
 	}
 }

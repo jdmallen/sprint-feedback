@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JDMallen.Toolbox" Version="2.2.4" />
-    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.4" />
+    <PackageReference Include="JDMallen.Toolbox" Version="2.2.7" />
+    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
   </ItemGroup>
 

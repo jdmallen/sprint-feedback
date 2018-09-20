@@ -1,5 +1,3 @@
-using System;
-
 namespace SprintFeedback.Web.Models
 {
     public class ErrorViewModel

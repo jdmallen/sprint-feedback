@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Infrastructure.EFCore.Implementations;
 using SprintFeedback.Data.Context.EFCore.Config;
 using SprintFeedback.Data.Models;
@@ -18,7 +19,40 @@ namespace SprintFeedback.Data.Context.EFCore.Repositories
 
 		protected override IQueryable<Feedback> BuildQuery(FeedbackParameters parameters)
 		{
-			throw new NotImplementedException();
+			var query = BuildQueryInit(parameters);
+
+			if (parameters == null)
+			{
+				return query;
+			}
+
+			if (parameters.IsPositive)
+			{
+				query = query.Where(f => f.IsPositive);
+			}
+
+			if (!parameters.Comment.IsNullOrWhiteSpace())
+			{
+				query = query.Where(
+					f => f.Comment.ToLowerInvariant()
+						.Contains(parameters.Comment.ToLowerInvariant()));
+			}
+
+			if (!parameters.DisplayName.IsNullOrWhiteSpace())
+			{
+				query = query.Where(
+					f => f.DisplayName.ToLowerInvariant()
+						.Contains(parameters.DisplayName.ToLowerInvariant()));
+			}
+
+			if (!parameters.UserName.IsNullOrWhiteSpace())
+			{
+				query = query.Where(
+					f => f.UserName.ToLowerInvariant()
+						.Contains(parameters.UserName.ToLowerInvariant()));
+			}
+
+			return BuildQueryFinal(parameters, query);
 		}
 	}
 }

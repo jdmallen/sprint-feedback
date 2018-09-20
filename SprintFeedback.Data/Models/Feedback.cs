@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using GenFu;
 using JDMallen.Toolbox.Implementations;
-using JDMallen.Toolbox.Interfaces;
-using JDMallen.Toolbox.Structs;
 
 namespace SprintFeedback.Data.Models
 {
