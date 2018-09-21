@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using JDMallen.Toolbox.Interfaces;
-using JDMallen.Toolbox.Models;
+using JDMallen.Toolbox.RepositoryPattern.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using SprintFeedback.Data.Context.EFCore.Repositories;
 using SprintFeedback.Data.Models;
 using SprintFeedback.Data.Parameters;
+using SprintFeedback.Data.Repositories;
 
 namespace SprintFeedback.Web.Controllers
 {
@@ -14,31 +13,31 @@ namespace SprintFeedback.Web.Controllers
 	[ApiController]
 	public class ApiFeedbackController : ControllerBase
 	{
-		private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+		private readonly IUnitOfWork _unitOfWork;
+
+		private IFeedbackRepository GetFeedbackRepo()
+		{
+			return _unitOfWork.GetRepository(nameof(Feedback)) as
+				       IFeedbackRepository;
+		}
 
 		public ApiFeedbackController(
-			IUnitOfWorkFactory unitOfWorkFactory)
+			IUnitOfWork unitOfWork)
 		{
-			_unitOfWorkFactory = unitOfWorkFactory;
+			_unitOfWork = unitOfWork;
 		}
 
 		[HttpGet]
 		public async Task<ActionResult<IPagedResult<Feedback>>> Find(
 			[FromQuery] FeedbackParameters parameters)
 		{
-			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
-			{
-				return Ok(await uow.FeedbackRepository.FindPaged(parameters));
-			}
+			return Ok(await GetFeedbackRepo().FindPaged(parameters));
 		}
 
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Feedback>> Find(Guid id)
 		{
-			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
-			{
-				return Ok(await uow.FeedbackRepository.Get(id));
-			}
+			return Ok(await GetFeedbackRepo().Get(id));
 		}
 
 		// POST api/values
@@ -49,13 +48,9 @@ namespace SprintFeedback.Web.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest();
 
-			Feedback added;
-			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
-			{
-				uow.Begin();
-				added = await uow.FeedbackRepository.Add(feedback);
-				uow.Commit();
-			}
+			_unitOfWork.ResetUnitOfWork();
+			var added = await GetFeedbackRepo().Add(feedback);
+			_unitOfWork.Commit();
 
 			return CreatedAtAction(nameof(Find), new {added.Id}, added);
 		}
@@ -69,13 +64,9 @@ namespace SprintFeedback.Web.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest();
 
-			Feedback updated;
-			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
-			{
-				uow.Begin();
-				updated = await uow.FeedbackRepository.Update(feedback);
-				uow.Commit();
-			}
+			_unitOfWork.ResetUnitOfWork();
+			var updated = await GetFeedbackRepo().Update(feedback);
+			_unitOfWork.Commit();
 
 			return Ok(updated);
 		}
@@ -87,13 +78,9 @@ namespace SprintFeedback.Web.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest();
 
-			Feedback deleted;
-			using (var uow = _unitOfWorkFactory.GetUnitOfWork())
-			{
-				uow.Begin();
-				deleted = await uow.FeedbackRepository.Remove(id);
-				uow.Commit();
-			}
+			_unitOfWork.ResetUnitOfWork();
+			var deleted = await GetFeedbackRepo().Remove(id);
+			_unitOfWork.Commit();
 
 			return Ok(deleted);
 		}

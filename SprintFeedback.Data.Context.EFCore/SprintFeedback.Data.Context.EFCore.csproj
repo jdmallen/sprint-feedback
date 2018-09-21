@@ -1,19 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 	
   <ItemGroup>
-    <PackageReference Include="JDMallen.Toolbox" Version="2.2.7" />
-    <PackageReference Include="JDMallen.Toolbox.Infrastructure.EFCore" Version="2.2.7" />
-    <PackageReference Include="JDMallen.Toolbox.RepositoryPattern" Version="2.2.7" />
+    <PackageReference Include="JDMallen.Toolbox.Infrastructure.EFCore" Version="2.2.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <!--<ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />-->
     <ProjectReference Include="..\SprintFeedback\SprintFeedback.csproj" />
     <ProjectReference Include="..\SprintFeedback.Data\SprintFeedback.Data.csproj" />
   </ItemGroup>

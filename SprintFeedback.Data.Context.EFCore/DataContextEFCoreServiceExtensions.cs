@@ -1,4 +1,6 @@
 ﻿using System;
+using JDMallen.Toolbox.Interfaces;
+using JDMallen.Toolbox.RepositoryPattern.Interfaces;
 // using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,8 +53,9 @@ namespace SprintFeedback.Data.Context.EFCore
 					}
 				});
 
+			services.AddTransient<IContext, SfContext>();
 			services.AddTransient<IFeedbackRepository, FeedbackRepository>();
-			services.AddTransient<IUnitOfWorkFactory, UnitOfWorkFactory>();
+			services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 			return services;
 		}
