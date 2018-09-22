@@ -102,10 +102,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_components */ "./ClientApp/_components/index.js");
-/* harmony import */ var _ducks_allFeedback__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../_ducks/allFeedback */ "./ClientApp/_ducks/allFeedback.js");
-/* harmony import */ var _ducks_myFeedback__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../_ducks/myFeedback */ "./ClientApp/_ducks/myFeedback.js");
-/* harmony import */ var _Feedback_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Feedback.scss */ "./ClientApp/Feedback/Feedback.scss");
-/* harmony import */ var _Feedback_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_Feedback_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ducks_feedback__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../_ducks/feedback */ "./ClientApp/_ducks/feedback.js");
+/* harmony import */ var _Feedback_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Feedback.scss */ "./ClientApp/Feedback/Feedback.scss");
+/* harmony import */ var _Feedback_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Feedback_scss__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -132,7 +131,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Feedback =
 /*#__PURE__*/
 function (_Component) {
@@ -147,21 +145,18 @@ function (_Component) {
   _createClass(Feedback, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this$props = this.props,
-          getAllFeedback = _this$props.getAllFeedback,
-          getMyFeedback = _this$props.getMyFeedback;
-      getAllFeedback("https://5b8eff6feb676700148a4ca4.mockapi.io/AllFeedback");
-      getMyFeedback("https://5b8eff6feb676700148a4ca4.mockapi.io/MyFeedback");
+      var getFeedback = this.props.getFeedback;
+      getFeedback("/api/Feedback");
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          allFeedback = _this$props2.allFeedback,
-          myFeedback = _this$props2.myFeedback,
-          loading = _this$props2.loading;
+      var _this$props = this.props,
+          allFeedback = _this$props.allFeedback,
+          myFeedback = _this$props.myFeedback,
+          loading = _this$props.loading;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _Feedback_scss__WEBPACK_IMPORTED_MODULE_7___default.a.cards
+        className: _Feedback_scss__WEBPACK_IMPORTED_MODULE_6___default.a.cards
       }, loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_4__["LoadingGif"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         exact: true,
         path: "/",
@@ -186,16 +181,11 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 Feedback.propTypes = {
-  myFeedback: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
-  allFeedback: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
+  feedback: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
   loading: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired
 };
 Feedback.defaultProps = {
-  allFeedback: {
-    columns: [],
-    rows: []
-  },
-  myFeedback: {
+  feedback: {
     columns: [],
     rows: []
   }
@@ -203,19 +193,15 @@ Feedback.defaultProps = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    allFeedback: state.allFeedback.list,
-    myFeedback: state.myFeedback.list,
-    loading: state.myFeedback.isLoading
+    feedback: state.feedback.list,
+    loading: state.feedback.isLoading
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getAllFeedback: function getAllFeedback(url) {
-      return dispatch(Object(_ducks_allFeedback__WEBPACK_IMPORTED_MODULE_5__["listFetchData"])(url));
-    },
-    getMyFeedback: function getMyFeedback(url) {
-      return dispatch(Object(_ducks_myFeedback__WEBPACK_IMPORTED_MODULE_6__["listFetchData"])(url));
+    getFeedback: function getFeedback(url) {
+      return dispatch(Object(_ducks_feedback__WEBPACK_IMPORTED_MODULE_5__["listFetchData"])(url));
     }
   };
 };
@@ -232,7 +218,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"cards":"Feedback__cards___1LX3e"};
+module.exports = {"cards":"Feedback__cards___2XByO"};
 
 /***/ }),
 
@@ -394,7 +380,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"app":"MainApp__app___1-SLo","navbar":"MainApp__navbar___3Sukn"};
+module.exports = {"app":"MainApp__app___Xq2h5","navbar":"MainApp__navbar___ppML5"};
 
 /***/ }),
 
@@ -432,7 +418,7 @@ var Footer = function Footer() {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"license":"Footer__license___2nqto"};
+module.exports = {"license":"Footer__license___2MVlv"};
 
 /***/ }),
 
@@ -476,7 +462,7 @@ var LoadingGif = function LoadingGif() {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"loading":"LoadingGif__loading___3SPkc"};
+module.exports = {"loading":"LoadingGif__loading___tfFgJ"};
 
 /***/ }),
 
@@ -543,7 +529,7 @@ var Postits = function Postits(_ref) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"positive":"Postits__positive___KnI_0","negative":"Postits__negative___olf2n","headerButton":"Postits__headerButton___2N9-H"};
+module.exports = {"positive":"Postits__positive___3cYqn","negative":"Postits__negative___383nr","headerButton":"Postits__headerButton___e-gxw"};
 
 /***/ }),
 
@@ -677,10 +663,10 @@ var success = function success(message) {
 
 /***/ }),
 
-/***/ "./ClientApp/_ducks/allFeedback.js":
-/*!*****************************************!*\
-  !*** ./ClientApp/_ducks/allFeedback.js ***!
-  \*****************************************/
+/***/ "./ClientApp/_ducks/feedback.js":
+/*!**************************************!*\
+  !*** ./ClientApp/_ducks/feedback.js ***!
+  \**************************************/
 /*! exports provided: default, listHasErrored, listIsLoading, listFetchDataSuccess, listFetchData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -696,9 +682,9 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
  // Actions
 
-var ERRORED = "sprint-feedback/all-feedback/HAS_ERRORED";
-var LOADING = "sprint-feedback/all-feedback/IS_LOADING";
-var FETCH_DATA_SUCCESS = "sprint-feedback/all-feedback/FETCH_DATA_SUCCESS"; // Reducer
+var ERRORED = "sprint-feedback/feedback/HAS_ERRORED";
+var LOADING = "sprint-feedback/feedback/IS_LOADING";
+var FETCH_DATA_SUCCESS = "sprint-feedback/feedback/FETCH_DATA_SUCCESS"; // Reducer
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
@@ -747,10 +733,12 @@ function listFetchDataSuccess(list) {
     payload: list
   };
 }
-function listFetchData(url) {
+function listFetchData(url, data) {
   return function (dispatch) {
     dispatch(listIsLoading(true));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: data
+    }).then(function (response) {
       dispatch(listIsLoading(false));
       return response;
     }).then(function (response) {
@@ -769,7 +757,7 @@ function listFetchData(url) {
 /*!***********************************!*\
   !*** ./ClientApp/_ducks/index.js ***!
   \***********************************/
-/*! exports provided: alert, allFeedback, myFeedback, ui */
+/*! exports provided: alert, feedback, ui */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -777,107 +765,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alert */ "./ClientApp/_ducks/alert.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "alert", function() { return _alert__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _allFeedback__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./allFeedback */ "./ClientApp/_ducks/allFeedback.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "allFeedback", function() { return _allFeedback__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _feedback__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feedback */ "./ClientApp/_ducks/feedback.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "feedback", function() { return _feedback__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-/* harmony import */ var _myFeedback__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./myFeedback */ "./ClientApp/_ducks/myFeedback.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "myFeedback", function() { return _myFeedback__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui */ "./ClientApp/_ducks/ui.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ui", function() { return _ui__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./ClientApp/_ducks/ui.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ui", function() { return _ui__WEBPACK_IMPORTED_MODULE_2__["default"]; });
 
 
 
 
-
-
-/***/ }),
-
-/***/ "./ClientApp/_ducks/myFeedback.js":
-/*!****************************************!*\
-  !*** ./ClientApp/_ducks/myFeedback.js ***!
-  \****************************************/
-/*! exports provided: default, listHasErrored, listIsLoading, listFetchDataSuccess, listFetchData */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listHasErrored", function() { return listHasErrored; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listIsLoading", function() { return listIsLoading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listFetchDataSuccess", function() { return listFetchDataSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listFetchData", function() { return listFetchData; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
- // Actions
-
-var ERRORED = "sprint-feedback/my-feedback/HAS_ERRORED";
-var LOADING = "sprint-feedback/my-feedback/IS_LOADING";
-var FETCH_DATA_SUCCESS = "sprint-feedback/my-feedback/FETCH_DATA_SUCCESS"; // Reducer
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    hasErrored: false,
-    isLoading: false,
-    list: {}
-  };
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case ERRORED:
-      return _extends({}, state, {
-        hasErrored: action.payload
-      });
-
-    case LOADING:
-      return _extends({}, state, {
-        isLoading: action.payload
-      });
-
-    case FETCH_DATA_SUCCESS:
-      return _extends({}, state, {
-        list: action.payload
-      });
-
-    default:
-      return state;
-  }
-}); // Action Creators
-
-function listHasErrored(boolValue) {
-  return {
-    type: ERRORED,
-    payload: boolValue
-  };
-}
-function listIsLoading(boolValue) {
-  return {
-    type: LOADING,
-    payload: boolValue
-  };
-}
-function listFetchDataSuccess(list) {
-  return {
-    type: FETCH_DATA_SUCCESS,
-    payload: list
-  };
-}
-function listFetchData(url) {
-  return function (dispatch) {
-    dispatch(listIsLoading(true));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-      dispatch(listIsLoading(false));
-      return response;
-    }).then(function (response) {
-      return dispatch(listFetchDataSuccess(response.data));
-    }).catch(function () {
-      return dispatch(listHasErrored(true));
-    }).finally(function () {
-      return dispatch(listIsLoading(false));
-    });
-  };
-}
 
 /***/ }),
 
@@ -72941,7 +72837,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! babel-polyfill */"./node_modules/babel-polyfill/lib/index.js");
-module.exports = __webpack_require__(/*! E:\git\sprintfeedback\SprintFeedback.Web\ClientApp/index.jsx */"./ClientApp/index.jsx");
+module.exports = __webpack_require__(/*! /home/jesse/git/sprint-feedback/SprintFeedback.Web/ClientApp/index.jsx */"./ClientApp/index.jsx");
 
 
 /***/ })

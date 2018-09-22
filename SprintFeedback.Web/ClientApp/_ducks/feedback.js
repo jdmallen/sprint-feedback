@@ -1,9 +1,9 @@
 ﻿import axios from "axios";
 
 // Actions
-const ERRORED = "sprint-feedback/all-feedback/HAS_ERRORED";
-const LOADING = "sprint-feedback/all-feedback/IS_LOADING";
-const FETCH_DATA_SUCCESS = "sprint-feedback/all-feedback/FETCH_DATA_SUCCESS";
+const ERRORED = "sprint-feedback/feedback/HAS_ERRORED";
+const LOADING = "sprint-feedback/feedback/IS_LOADING";
+const FETCH_DATA_SUCCESS = "sprint-feedback/feedback/FETCH_DATA_SUCCESS";
 
 // Reducer
 export default (
@@ -66,14 +66,17 @@ export function listFetchDataSuccess(list)
 	};
 }
 
-export function listFetchData(url)
+export function listFetchData(url, data)
 {
 	return (dispatch) =>
 	{
 		dispatch(listIsLoading(true));
 
 		axios
-			.get(url)
+			.get(url,
+				{
+					params: data,
+				})
 			.then((response) =>
 			{
 				dispatch(listIsLoading(false));

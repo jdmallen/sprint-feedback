@@ -1,4 +1,3 @@
 ﻿export { default as alert } from "./alert";
-export { default as allFeedback } from "./allFeedback";
-export { default as myFeedback } from "./myFeedback";
+export { default as feedback } from "./feedback";
 export { default as ui } from "./ui";

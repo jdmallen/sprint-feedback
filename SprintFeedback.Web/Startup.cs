@@ -158,7 +158,7 @@ namespace SprintFeedback.Web
 				});
 
 			// dbContext.Database.EnsureDeleted();
-			// dbContext.Database.EnsureCreated();
+			dbContext.Database.EnsureCreated();
 		}
 	}
 }

@@ -7,17 +7,15 @@ import {
 	Link,
 } from "react-router-dom";
 import { Postits, LoadingGif } from "../_components";
-import { listFetchData as fetchAllFeedback } from "../_ducks/allFeedback";
-import { listFetchData as fetchMyFeedback } from "../_ducks/myFeedback";
+import { listFetchData as fetchFeedback } from "../_ducks/feedback";
 import styles from "./Feedback.scss";
 
 class Feedback extends Component
 {
 	componentDidMount()
 	{
-		const { getAllFeedback, getMyFeedback } = this.props;
-		getAllFeedback("https://5b8eff6feb676700148a4ca4.mockapi.io/AllFeedback");
-		getMyFeedback("https://5b8eff6feb676700148a4ca4.mockapi.io/MyFeedback");
+		const { getFeedback } = this.props;
+		getFeedback("/api/Feedback");
 	}
 
 	render()
@@ -50,17 +48,12 @@ class Feedback extends Component
 
 
 Feedback.propTypes = {
-	myFeedback: PropTypes.object,
-	allFeedback: PropTypes.object,
+	feedback: PropTypes.object,
 	loading: PropTypes.bool.isRequired,
 };
 
 Feedback.defaultProps = {
-	allFeedback: {
-		columns: [],
-		rows: [],
-	},
-	myFeedback: {
+	feedback: {
 		columns: [],
 		rows: [],
 	},
@@ -68,17 +61,14 @@ Feedback.defaultProps = {
 
 const mapStateToProps = state =>
 	({
-		allFeedback: state.allFeedback.list,
-		myFeedback: state.myFeedback.list,
-		loading: state.myFeedback.isLoading,
+		feedback: state.feedback.list,
+		loading: state.feedback.isLoading,
 	});
 
 const mapDispatchToProps = dispatch =>
 	({
-		getAllFeedback: url =>
-			dispatch(fetchAllFeedback(url)),
-		getMyFeedback: url =>
-			dispatch(fetchMyFeedback(url)),
+		getFeedback: url =>
+			dispatch(fetchFeedback(url)),
 	});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
